@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using EF;
 
 namespace WebAPI.Controllers
 {
@@ -32,7 +33,7 @@ namespace WebAPI.Controllers
 
         // PUT api/SysInfo/5
         [HttpPut("{pcname}")]
-        public void Put(string pcname, [FromBody] string manufacturer, )
+        public void Put(string pcname, [FromBody] SysInfo sysInfo)
         {
         }
 

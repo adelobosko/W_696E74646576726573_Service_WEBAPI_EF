@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EF
+namespace WebAPI.EF
 {
     public class LoggedUsersLog
     {

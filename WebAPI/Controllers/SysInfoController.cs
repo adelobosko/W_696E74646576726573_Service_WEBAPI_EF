@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataModel;
 using Microsoft.AspNetCore.Mvc;
-using EF;
+using WebAPI.EF;
 
 namespace WebAPI.Controllers
 {
@@ -11,36 +12,10 @@ namespace WebAPI.Controllers
     [ApiController]
     public class SysInfoController : ControllerBase
     {
-        // GET api/SysInfo
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [HttpPut]
+        public void Put([FromBody] SysInfoDM sysInfoDM)
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/SysInfo/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/SysInfo
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/SysInfo/5
-        [HttpPut("{pcname}")]
-        public void Put(string pcname, [FromBody] SysInfo sysInfo)
-        {
-        }
-
-        // DELETE api/SysInfo/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var res = DbCommands.PutSysInfo(WorkHelper.DataModelToEFModel(sysInfoDM));
         }
     }
 }

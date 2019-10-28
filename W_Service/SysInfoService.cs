@@ -1,9 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.ServiceProcess;
+﻿using System.ServiceProcess;
 using System.Timers;
-using static W_Service.InfoHelper;
 
 namespace W_Service
 {
@@ -17,33 +13,26 @@ namespace W_Service
 
         protected override void OnStart(string[] args)
         {
-            Log();
+            WorkHelper.Log("Service started");
+            WorkHelper.LogSysInfo();
             _timer = new Timer
             {
                 AutoReset = true,
-                Interval = 5000,
+                Interval = 1000*60*30,
                 Enabled = true
             };
-            _timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            _timer.Elapsed += OnTimedEvent;
         }
 
-        private void OnTimedEvent(object sender, ElapsedEventArgs e)
+        private static void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
-            Log();
+            WorkHelper.LogSysInfo();
         }
 
-        private static void Log()
-        {
-            var str = $"{GetPCName()}\r\n{GetManufacturer()}";
-            str += $"\r\n{GetUsers().Aggregate((i, j) => $"{i}, {j}")}";
-            str += $"\r\n{GetCPULoad().Select(cpu => $"{cpu.Item1}: {cpu.Item2}%").Aggregate((i, j) => $"{i}, {j}")}";
-            str += $"\r\n{GetRAMLoad()}";
-            str += $"\r\n{DateTime.Now.ToString()}";
-            File.WriteAllText("E:\\res.txt", str);
-        }
 
         protected override void OnStop()
         {
+            WorkHelper.Log($"Service is stopped!");
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EF
+namespace WebAPI.EF
 {
     public class SysInfo
     {
@@ -13,12 +13,12 @@ namespace EF
 
 
         public ICollection<CpuLog> CPULogs { get; set; }
-        public ICollection<LoggedUsersLog> LoggedUsersLog { get; set; }
+        public ICollection<LoggedUsersLog> LoggedUsersLogs { get; set; }
 
         public SysInfo()
         {
             CPULogs = new List<CpuLog>();
-            LoggedUsersLog = new List<LoggedUsersLog>();
+            LoggedUsersLogs = new List<LoggedUsersLog>();
         }
 
     }
